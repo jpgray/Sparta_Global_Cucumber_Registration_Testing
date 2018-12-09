@@ -56,16 +56,37 @@ Feature: Sparta Global Registration Form
     Then the options are coloured red
     And I remain on the same page
 
-    Scenario: I should be able to register an account
-    Given I land on the registration page
-    When I enter correct personal information
-    And I enter correct degree information
-    And I enter a correct address
-    And I enter a correct email
-    And I enter correct contact details
-    And I upload my CV
-    And I agree to the terms
-    And I select a stream
-    And I rate the form
-    And I click the register button
-    Then I should receive confirmation that my account was registered
+  Scenario: Submitting without a degree
+    Given I am on the registration page
+    And I enter all details correctly
+    And I clear the degree field
+    When I submit the form
+    Then I remain on the same page
+
+  Scenario: Submitting without an address
+    Given I am on the registration page
+    And I enter all details correctly
+    And I clear the address line one field
+    When I submit the form
+    Then I remain on the same page
+
+  Scenario: Submitting without a city
+    Given I am on the registration page
+    And I enter all details correctly
+    And I clear the city field
+    When I submit the form
+    Then I remain on the same page
+    
+  # Scenario: Registering an account
+  #   Given I land on the registration page
+  #   When I enter correct personal information
+  #   And I enter correct degree information
+  #   And I enter a correct address
+  #   And I enter a correct email
+  #   And I enter correct contact details
+  #   And I upload my CV
+  #   And I agree to the terms
+  #   And I select a stream
+  #   And I rate the form
+  #   And I click the register button
+  #   Then I should receive confirmation that my account was registered

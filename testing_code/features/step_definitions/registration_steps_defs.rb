@@ -8,6 +8,9 @@ Given("I enter all details correctly") do
   registration_page.enter_valid_age
   registration_page.enter_valid_date_of_birth
   registration_page.click_male
+  registration_page.enter_degree_title
+  registration_page.enter_address_line_1
+  registration_page.enter_city
 end
 
 Given("I clear the first name field") do
@@ -20,6 +23,10 @@ end
 
 Given("I clear the age field") do
   registration_page.clear_age
+end
+
+Given("I clear the degree field") do
+  registration_page.clear_degree_field
 end
 
 Given("I clear the date of birth field") do
@@ -85,6 +92,15 @@ When("I enter correct degree information") do
   registration_page.input_degree_field(@degree)
   registration_page.select_university_from_dropdown(@uni)
 end
+
+Given("I clear the address line one field") do
+  registration_page.clear_address_line_1
+end
+
+Given("I clear the city field") do
+  registration_page.clear_city
+end
+
 
 When("I enter a correct address") do
   pending # Write code here that turns the phrase above into concrete actions

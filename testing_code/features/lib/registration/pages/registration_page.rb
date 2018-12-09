@@ -24,6 +24,13 @@ class RegistrationPage
     @fail_color_rgba = 'rgba(220, 53, 69, 1)'
     @degree = 'Mechanical Engineering'
     @uni = 'University of Sheffield'
+    @degree_placeholder = "Enter Degree"
+    @address_line_1_id = "inputAddress"
+    @valid_address_line_1 = "1 Castle Yard"
+    @city_id = "inputCity"
+    @city = "Richmond"
+    @postcode_id = "inputPostcode"
+    @postcode = "TW10 6TF"
   end
 
 
@@ -63,6 +70,10 @@ class RegistrationPage
     fill_in(@age_placeholder, :with => "")
   end
 
+  def clear_degree_field
+    fill_in(@degree_placeholder, :with => "")
+  end
+
   def clear_date_of_birth
     fill_in(@date_of_birth_name, :with => "")
   end
@@ -97,12 +108,28 @@ class RegistrationPage
     end
   end
 
-  def input_degree_field degree_title
-    find('input[placeholder = "Enter Degree"]').native.send_keys(degree_title)
+  def enter_degree_title
+    fill_in(@degree_placeholder, :with => @degree)
   end
 
   def select_university_from_dropdown university
     select(university, from: '#inputUni')
+  end
+
+  def enter_address_line_1
+    fill_in(@address_line_1_id, :with => @valid_address_line_1)
+  end
+
+  def clear_address_line_1
+    fill_in(@address_line_1_id, :with => "")
+  end
+
+  def enter_city
+    fill_in(@city_id, :with => @city)
+  end
+
+  def clear_city
+    fill_in(@city_id, :with => "")
   end
 
   def check_css_color(element_identifier)
