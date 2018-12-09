@@ -1,3 +1,4 @@
+
 Given("I am on the registration page") do
   registration_page.visit_registration_page
 end

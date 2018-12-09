@@ -1,5 +1,6 @@
 Feature: Sparta Global Registration Form
 #Enter Scenarios here:
+
 # Have 1st given as "I enter all details correctly" ?
 
   Scenario: Submitting without a first name
@@ -76,7 +77,7 @@ Feature: Sparta Global Registration Form
     And I clear the city field
     When I submit the form
     Then I remain on the same page
-    
+
   # Scenario: Registering an account
   #   Given I land on the registration page
   #   When I enter correct personal information
