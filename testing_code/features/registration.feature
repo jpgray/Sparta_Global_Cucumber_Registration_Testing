@@ -48,3 +48,10 @@ Feature: Sparta Global Registration Form
     And I enter a valid date of birth
     When I submit the form
     Then the correct date is displayed
+
+  Scenario: Submitting without a gender
+    Given I am on the registration page
+    And I enter all details correctly other than choosing a gender
+    When I submit the form
+    Then the options are coloured red
+    And I remain on the same page

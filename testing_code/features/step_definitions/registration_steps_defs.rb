@@ -7,6 +7,7 @@ Given("I enter all details correctly") do
   registration_page.enter_lastName
   registration_page.enter_valid_age
   registration_page.enter_valid_date_of_birth
+  registration_page.click_male
 end
 
 Given("I clear the first name field") do
@@ -31,6 +32,13 @@ Given("I enter characters that are not numbers as an age") do
 end
 
 Given("I enter a valid date of birth") do
+  registration_page.enter_valid_date_of_birth
+end
+
+Given("I enter all details correctly other than choosing a gender") do
+  registration_page.enter_firstName
+  registration_page.enter_lastName
+  registration_page.enter_valid_age
   registration_page.enter_valid_date_of_birth
 end
 
@@ -60,4 +68,8 @@ end
 
 Then("the correct date is displayed") do
   expect(registration_page.get_date_of_birth_field).to eq "#{registration_page.date_of_birth_valid_input.year.to_s}-#{registration_page.date_of_birth_valid_input.month.to_s}-#{registration_page.date_of_birth_valid_input.day.to_s}"
+end
+
+Then("the options are coloured red") do
+  expect(registration_page.check_css_color(registration_page.male_radio_label_indentifier)).to eq registration_page.fail_color_rgba
 end

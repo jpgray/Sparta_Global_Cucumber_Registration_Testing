@@ -3,7 +3,7 @@ require 'capybara/dsl'
 class RegistrationPage
   include Capybara::DSL
 
-  attr_reader :registration_page_url, :first_name_error_message, :last_name_error_message, :age_error_message, :date_of_birth_valid_input
+  attr_reader :registration_page_url, :first_name_error_message, :last_name_error_message, :age_error_message, :date_of_birth_valid_input, :male_radio_label_indentifier, :fail_color_rgba
 
   def initialize
     @registration_page_url = 'https://crispyjourney.herokuapp.com/'
@@ -19,6 +19,9 @@ class RegistrationPage
     @age_error_message = 'Please enter your age.'
     @date_of_birth_name = 'dob'
     @date_of_birth_valid_input = Date.new(1066,10,14)
+    @male_radio_id = 'customRadioInline1'
+    @male_radio_label_indentifier = "label[for=#{@male_radio_id}]"
+    @fail_color_rgba = 'rgba(220, 53, 69, 1)'
   end
 
 
@@ -62,8 +65,11 @@ class RegistrationPage
     fill_in(@date_of_birth_name, :with => "")
   end
 
+  def click_male
+    find("label[for=#{@male_radio_id}]").click
+  end
+
   def click_submit
-    # click_button('Sign In')
     find("button[type='submit']").click
   end
 
@@ -87,6 +93,10 @@ class RegistrationPage
     else
       return true
     end
+  end
+
+  def check_css_color(element_identifier)
+    find(element_identifier).native.css_value('color')
   end
 
 end
