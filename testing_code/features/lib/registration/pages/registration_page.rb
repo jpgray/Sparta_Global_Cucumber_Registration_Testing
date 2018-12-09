@@ -3,7 +3,7 @@ require 'capybara/dsl'
 class RegistrationPage
   include Capybara::DSL
 
-  attr_reader :registration_page_url, :first_name_error_message, :last_name_error_message, :age_error_message
+  attr_reader :registration_page_url, :first_name_error_message, :last_name_error_message, :age_error_message, :date_of_birth_valid_input
 
   def initialize
     @registration_page_url = 'https://crispyjourney.herokuapp.com/'
@@ -17,6 +17,8 @@ class RegistrationPage
     @age_valid_input = '123'
     @age_invalid_input = 'hllo thr'
     @age_error_message = 'Please enter your age.'
+    @date_of_birth_name = 'dob'
+    @date_of_birth_valid_input = Date.new(1066,10,14)
   end
 
 
@@ -40,6 +42,26 @@ class RegistrationPage
     fill_in(@age_placeholder, :with => @age_invalid_input)
   end
 
+  def enter_valid_date_of_birth
+    fill_in(@date_of_birth_name, :with => "#{@date_of_birth_valid_input.day}#{@date_of_birth_valid_input.month}#{@date_of_birth_valid_input.year}")
+  end
+
+  def clear_first_name
+    fill_in(@first_name_id, :with => "")
+  end
+
+  def clear_last_name
+    fill_in(@last_name_id, :with => "")
+  end
+
+  def clear_age
+    fill_in(@age_placeholder, :with => "")
+  end
+
+  def clear_date_of_birth
+    fill_in(@date_of_birth_name, :with => "")
+  end
+
   def click_submit
     # click_button('Sign In')
     find("button[type='submit']").click
@@ -51,6 +73,10 @@ class RegistrationPage
 
   def get_age_field
     find("input[placeholder='#{@age_placeholder}']").text
+  end
+
+  def get_date_of_birth_field
+    find("input[name=#{@date_of_birth_name}]").value
   end
 
   def check_error_messages(expected_text)
