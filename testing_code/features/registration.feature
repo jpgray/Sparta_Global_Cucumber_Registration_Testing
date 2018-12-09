@@ -1,5 +1,6 @@
 Feature: Sparta Global Registration Form
 #Enter Scenarios here:
+
 # Have 1st given as "I enter all details correctly" ?
 
   Scenario: Submitting without a first name
@@ -55,3 +56,4 @@ Feature: Sparta Global Registration Form
     When I submit the form
     Then the options are coloured red
     And I remain on the same page
+
