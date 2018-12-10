@@ -1,8 +1,6 @@
 Feature: Sparta Global Registration Form
 #Enter Scenarios here:
 
-# Have 1st given as "I enter all details correctly" ?
-
   Scenario: Submitting without a first name
     Given I am on the registration page
     And I enter all details correctly
@@ -57,3 +55,38 @@ Feature: Sparta Global Registration Form
     Then the options are coloured red
     And I remain on the same page
 
+  Scenario: Submitting without a degree
+    Given I am on the registration page
+    And I enter all details correctly
+    And I clear the degree field
+    When I submit the form
+    Then I remain on the same page
+
+  Scenario: Submitting without an address
+    Given I am on the registration page
+    And I enter all details correctly
+    And I clear the address line one field
+    When I submit the form
+    Then I remain on the same page
+    And I receive an error message prompt to enter an address
+
+  Scenario: Submitting without a city
+    Given I am on the registration page
+    And I enter all details correctly
+    And I clear the city field
+    When I submit the form
+    Then I remain on the same page
+
+  Scenario: Submitting without a postcode
+    Given I am on the registration page
+    And I enter all details correctly
+    And I clear the postcode field
+    When I submit the form
+    Then I remain on the same page
+    And I receive an error message prompt to enter a postcode
+
+  Scenario: Registering an account
+    Given I land on the registration page
+    And I enter all details correctly
+    When I submit the form
+    Then I should receive confirmation that my account was registered

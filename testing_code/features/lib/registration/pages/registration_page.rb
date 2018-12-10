@@ -3,7 +3,7 @@ require 'capybara/dsl'
 class RegistrationPage
   include Capybara::DSL
 
-  attr_reader :registration_page_url, :first_name_error_message, :last_name_error_message, :age_error_message, :date_of_birth_valid_input, :male_radio_label_indentifier, :fail_color_rgba
+  attr_reader :registration_page_url, :first_name_error_message, :last_name_error_message, :age_error_message, :date_of_birth_valid_input, :male_radio_label_indentifier, :fail_color_rgba, :degree, :uni, :address_error_message, :postcode_error_message
 
   def initialize
     @registration_page_url = 'https://crispyjourney.herokuapp.com/'
@@ -22,8 +22,19 @@ class RegistrationPage
     @male_radio_id = 'customRadioInline1'
     @male_radio_label_indentifier = "label[for=#{@male_radio_id}]"
     @fail_color_rgba = 'rgba(220, 53, 69, 1)'
+    @degree = 'Mechanical Engineering'
+    @uni = 'University of Sheffield'
+    @degree_placeholder = "Enter Degree"
+    @address_line_1_id = "inputAddress"
+    @valid_address_line_1 = "1 Castle Yard"
+    @city_id = "inputCity"
+    @city = "Richmond"
+    @postcode_id = "inputPostcode"
+    @postcode = "TW10 6TF"
+    @address_error_message = "Please enter an address."
+    @postcode_error_message = 'Please enter a postcode.'
+    @county = "Buckinghamshire"
   end
-
 
   def visit_registration_page
     visit(@registration_page_url)
@@ -61,6 +72,10 @@ class RegistrationPage
     fill_in(@age_placeholder, :with => "")
   end
 
+  def clear_degree_field
+    fill_in(@degree_placeholder, :with => "")
+  end
+
   def clear_date_of_birth
     fill_in(@date_of_birth_name, :with => "")
   end
@@ -93,6 +108,42 @@ class RegistrationPage
     else
       return true
     end
+  end
+
+  def enter_degree_title
+    fill_in(@degree_placeholder, :with => @degree)
+  end
+
+  def select_university_from_dropdown
+    find('#inputUni').find(:option, "#{@uni}").select_option
+  end
+
+  def enter_address_line_1
+    fill_in(@address_line_1_id, :with => @valid_address_line_1)
+  end
+
+  def clear_address_line_1
+    fill_in(@address_line_1_id, :with => "")
+  end
+
+  def enter_city
+    fill_in(@city_id, :with => @city)
+  end
+
+  def clear_city
+    fill_in(@city_id, :with => "")
+  end
+
+  def select_county_from_dropdown
+    find('#inputCounty').find(:option, "#{@county}").select_option
+  end
+
+  def enter_postcode
+    fill_in(@postcode_id, :with => @postcode)
+  end
+
+  def clear_postcode
+    fill_in(@postcode_id, :with => "")
   end
 
   def check_css_color(element_identifier)
@@ -139,4 +190,3 @@ class RegistrationPage
   end
 
 end
-
