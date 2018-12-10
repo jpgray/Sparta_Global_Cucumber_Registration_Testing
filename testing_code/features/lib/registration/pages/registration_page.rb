@@ -3,7 +3,7 @@ require 'capybara/dsl'
 class RegistrationPage
   include Capybara::DSL
 
-  attr_reader :registration_page_url, :first_name_error_message, :last_name_error_message, :age_error_message, :date_of_birth_valid_input, :male_radio_label_indentifier, :fail_color_rgba, :degree, :uni
+  attr_reader :registration_page_url, :first_name_error_message, :last_name_error_message, :age_error_message, :date_of_birth_valid_input, :male_radio_label_indentifier, :fail_color_rgba, :degree, :uni, :address_error_message, :postcode_error_message
 
   def initialize
     @registration_page_url = 'https://crispyjourney.herokuapp.com/'
@@ -31,8 +31,10 @@ class RegistrationPage
     @city = "Richmond"
     @postcode_id = "inputPostcode"
     @postcode = "TW10 6TF"
+    @address_error_message = "Please enter an address."
+    @postcode_error_message = 'Please enter a postcode.'
+    @county = "Buckinghamshire"
   end
-
 
   def visit_registration_page
     visit(@registration_page_url)
@@ -112,8 +114,8 @@ class RegistrationPage
     fill_in(@degree_placeholder, :with => @degree)
   end
 
-  def select_university_from_dropdown university
-    select(university, from: '#inputUni')
+  def select_university_from_dropdown
+    find('#inputUni').find(:option, "#{@uni}").select_option
   end
 
   def enter_address_line_1
@@ -130,6 +132,18 @@ class RegistrationPage
 
   def clear_city
     fill_in(@city_id, :with => "")
+  end
+
+  def select_county_from_dropdown
+    find('#inputCounty').find(:option, "#{@county}").select_option
+  end
+
+  def enter_postcode
+    fill_in(@postcode_id, :with => @postcode)
+  end
+
+  def clear_postcode
+    fill_in(@postcode_id, :with => "")
   end
 
   def check_css_color(element_identifier)
@@ -176,4 +190,3 @@ class RegistrationPage
   end
 
 end
-

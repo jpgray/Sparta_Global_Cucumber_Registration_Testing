@@ -1,8 +1,6 @@
 Feature: Sparta Global Registration Form
 #Enter Scenarios here:
 
-# Have 1st given as "I enter all details correctly" ?
-
   Scenario: Submitting without a first name
     Given I am on the registration page
     And I enter all details correctly
@@ -70,6 +68,7 @@ Feature: Sparta Global Registration Form
     And I clear the address line one field
     When I submit the form
     Then I remain on the same page
+    And I receive an error message prompt to enter an address
 
   Scenario: Submitting without a city
     Given I am on the registration page
@@ -78,16 +77,16 @@ Feature: Sparta Global Registration Form
     When I submit the form
     Then I remain on the same page
 
-  # Scenario: Registering an account
-  #   Given I land on the registration page
-  #   When I enter correct personal information
-  #   And I enter correct degree information
-  #   And I enter a correct address
-  #   And I enter a correct email
-  #   And I enter correct contact details
-  #   And I upload my CV
-  #   And I agree to the terms
-  #   And I select a stream
-  #   And I rate the form
-  #   And I click the register button
-  #   Then I should receive confirmation that my account was registered
+  Scenario: Submitting without a postcode
+    Given I am on the registration page
+    And I enter all details correctly
+    And I clear the postcode field
+    When I submit the form
+    Then I remain on the same page
+    And I receive an error message prompt to enter a postcode
+
+  Scenario: Registering an account
+    Given I land on the registration page
+    And I enter all details correctly
+    When I submit the form
+    Then I should receive confirmation that my account was registered

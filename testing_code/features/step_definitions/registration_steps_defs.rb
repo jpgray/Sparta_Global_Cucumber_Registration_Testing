@@ -10,8 +10,17 @@ Given("I enter all details correctly") do
   registration_page.enter_valid_date_of_birth
   registration_page.click_male
   registration_page.enter_degree_title
+  registration_page.select_university_from_dropdown
   registration_page.enter_address_line_1
   registration_page.enter_city
+  registration_page.select_county_from_dropdown
+  registration_page.enter_postcode
+  registration_page.input_email
+  registration_page.input_skills
+  registration_page.input_phone_number
+  registration_page.input_linkedin
+  registration_page.select_SDET_Stream
+  registration_page.accept_terms_and_conditions
 end
 
 Given("I clear the first name field") do
@@ -86,9 +95,6 @@ Given("I land on the registration page") do
   registration_page.visit_registration_page
 end
 
-When("I enter correct personal information") do
-end
-
 When("I enter correct degree information") do
   registration_page.input_degree_field(@degree)
   registration_page.select_university_from_dropdown(@uni)
@@ -102,39 +108,18 @@ Given("I clear the city field") do
   registration_page.clear_city
 end
 
-
-When("I enter a correct address") do
-  pending # Write code here that turns the phrase above into concrete actions
+Given("I clear the postcode field") do
+  registration_page.clear_postcode
 end
 
-When("I enter a correct email") do
-  pending # Write code here that turns the phrase above into concrete actions
+Then("I receive an error message prompt to enter an address") do
+  expect(registration_page.check_error_messages(registration_page.address_error_message)).to be true
 end
 
-When("I enter correct contact details") do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-When("I upload my CV") do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-When("I agree to the terms") do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-When("I select a stream") do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-When("I rate the form") do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-When("I click the register button") do
-  pending # Write code here that turns the phrase above into concrete actions
+Then("I receive an error message prompt to enter a postcode") do
+  expect(registration_page.check_error_messages(registration_page.postcode_error_message)).to be true
 end
 
 Then("I should receive confirmation that my account was registered") do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(confirmation_page.check_confirmation_message).to eq confirmation_page.confirmation_message
 end
