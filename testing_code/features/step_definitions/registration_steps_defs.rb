@@ -57,6 +57,18 @@ Given("I enter all details correctly other than choosing a gender") do
   registration_page.enter_lastName
   registration_page.enter_valid_age
   registration_page.enter_valid_date_of_birth
+  registration_page.enter_degree_title
+  registration_page.select_university_from_dropdown
+  registration_page.enter_address_line_1
+  registration_page.enter_city
+  registration_page.select_county_from_dropdown
+  registration_page.enter_postcode
+  registration_page.input_email
+  registration_page.input_skills
+  registration_page.input_phone_number
+  registration_page.input_linkedin
+  registration_page.select_SDET_Stream
+  registration_page.accept_terms_and_conditions
 end
 
 When("I submit the form") do
@@ -89,10 +101,6 @@ end
 
 Then("the options are coloured red") do
   expect(registration_page.check_css_color(registration_page.male_radio_label_indentifier)).to eq registration_page.fail_color_rgba
-end
-
-Given("I land on the registration page") do
-  registration_page.visit_registration_page
 end
 
 When("I enter correct degree information") do
