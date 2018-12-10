@@ -86,7 +86,7 @@ Feature: Sparta Global Registration Form
     And I receive an error message prompt to enter a postcode
 
   Scenario: Registering an account
-    Given I land on the registration page
+    Given I am on the registration page
     And I enter all details correctly
     When I submit the form
     Then I should receive confirmation that my account was registered
