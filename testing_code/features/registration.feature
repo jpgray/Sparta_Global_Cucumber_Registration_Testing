@@ -1,5 +1,4 @@
 Feature: Sparta Global Registration Form
-#Enter Scenarios here:
 
   Scenario: Submitting without a first name
     Given I am on the registration page
@@ -84,6 +83,19 @@ Feature: Sparta Global Registration Form
     When I submit the form
     Then I remain on the same page
     And I receive an error message prompt to enter a postcode
+
+  Scenario: Submitting without an email
+    Given I am on the registration page
+    And I enter all details correctly
+    And I clear the email field
+    When I submit the form
+    Then I remain on the same page
+    And I receive an error message prompt to enter a email
+
+  Scenario: Uploading a file
+    Given I am on the registration page
+    When I upload a file
+    Then I expect to see the file name next to the button
 
   Scenario: Registering an account
     Given I am on the registration page

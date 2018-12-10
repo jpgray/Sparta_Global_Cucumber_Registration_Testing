@@ -21,6 +21,8 @@ Given("I enter all details correctly") do
   registration_page.input_linkedin
   registration_page.select_SDET_Stream
   registration_page.accept_terms_and_conditions
+  registration_page.form_rating
+  registration_page.upload_file
 end
 
 Given("I clear the first name field") do
@@ -69,6 +71,7 @@ Given("I enter all details correctly other than choosing a gender") do
   registration_page.input_linkedin
   registration_page.select_SDET_Stream
   registration_page.accept_terms_and_conditions
+  registration_page.form_rating
 end
 
 When("I submit the form") do
@@ -130,4 +133,20 @@ end
 
 Then("I should receive confirmation that my account was registered") do
   expect(confirmation_page.check_confirmation_message).to eq confirmation_page.confirmation_message
+end
+
+Given("I clear the email field") do
+  registration_page.clear_email
+end
+
+Then("I receive an error message prompt to enter a email") do
+  expect(registration_page.check_error_messages(registration_page.email_error_message)).to be true
+end
+
+When("I upload a file") do
+  registration_page.upload_file
+end
+
+Then("I expect to see the file name next to the button") do
+  expect(registration_page.check_file_message).to eq "C:\\fakepath\\#{registration_page.file_path}"
 end
