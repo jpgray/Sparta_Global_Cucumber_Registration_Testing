@@ -3,7 +3,7 @@ require 'capybara/dsl'
 class RegistrationPage
   include Capybara::DSL
 
-  attr_reader :registration_page_url, :first_name_error_message, :last_name_error_message, :age_error_message, :date_of_birth_valid_input, :male_radio_label_indentifier, :fail_color_rgba, :degree, :uni, :address_error_message, :postcode_error_message
+  attr_reader :registration_page_url, :first_name_error_message, :last_name_error_message, :age_error_message, :date_of_birth_valid_input, :male_radio_label_indentifier, :fail_color_rgba, :degree, :uni, :address_error_message, :postcode_error_message, :email_error_message, :file_path
 
   def initialize
     @registration_page_url = 'https://crispyjourney.herokuapp.com/'
@@ -34,6 +34,8 @@ class RegistrationPage
     @address_error_message = "Please enter an address."
     @postcode_error_message = 'Please enter a postcode.'
     @county = "Buckinghamshire"
+    @email_error_message = 'Please enter an email.'
+    @file_path = '90933.jpg'
   end
 
   def visit_registration_page
@@ -146,12 +148,24 @@ class RegistrationPage
     fill_in(@postcode_id, :with => "")
   end
 
+  def upload_file
+    attach_file('cv', File.absolute_path("#{@file_path}"))
+  end
+
+  def check_file_message
+    find("input[name = 'cv']").value
+  end
+
   def check_css_color(element_identifier)
     find(element_identifier).native.css_value('color')
   end
 
   def input_email
     fill_in('inputemailaddress', :with => 'test1@outlook.com')
+  end
+
+  def clear_email
+    fill_in('inputemailaddress', :with => '')
   end
 
   def input_skills
@@ -182,7 +196,7 @@ class RegistrationPage
   end
 
   def form_rating
-      find('#experienceSlider')
+      find('#experienceSlider').set 57
   end
 
   def click_submit
